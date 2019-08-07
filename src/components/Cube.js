@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CubeGrid from "./CubeGrid";
 
 const newCube = (partialMessage, size) => {
   const generateFullMessage = () => {
@@ -69,28 +70,6 @@ const newCube = (partialMessage, size) => {
     }
   }
   return cube;
-};
-
-const CubeGrid = ({ cube, size }) => {
-  console.log(cube);
-  const tr = [];
-  for (let i = 0; i < 3 * size; i++) {
-    const td = [];
-    for (let j = 0; j < 4 * size; j++) {
-      td.push(
-        <td key={`${i},${j}`} bgcolor={cube[i][j].color}>
-          {cube[i][j].character}
-        </td>
-      );
-    }
-    tr.push(<tr key={i}>{td}</tr>);
-  }
-
-  return (
-    <table>
-      <tbody>{tr}</tbody>
-    </table>
-  );
 };
 
 // const Slider = ({ speed, onSpeedChange }) => {};
