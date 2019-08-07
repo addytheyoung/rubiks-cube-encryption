@@ -21,7 +21,6 @@ const newCube = (partialMessage, size) => {
     this.character = character;
     this.color = color;
   }
-
   const cube = [];
   let cubeIndex = 0;
   for (let i = 0; i < size; i++) {
