@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 import CubeGrid from "./CubeGrid";
 import Slider from "./Slider";
 
@@ -84,23 +85,28 @@ export default function Cube(props) {
 
   function runStopButton() {
     return isGameRunning ? (
-      <button type="button" onClick={handleStop}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => setIsGameRunning(false)}
+      >
         Stop
-      </button>
+      </Button>
     ) : (
-      <button type="button" onClick={handleRun}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setIsGameRunning(true)}
+      >
         Start
-      </button>
+      </Button>
     );
   }
-
-  function handleRun() {}
-
-  function handleStop() {}
 
   return (
     <div>
       <div>
+        {runStopButton()}
         <Slider speed={speed} onSpeedChange={newSpeed => setSpeed(newSpeed)} />
       </div>
       <CubeGrid cube={cube} size={size} />
