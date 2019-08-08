@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CubeGrid from "./CubeGrid";
+import Slider from "./Slider";
 
 const newCube = (partialMessage, size) => {
   const generateFullMessage = () => {
@@ -99,6 +100,9 @@ export default function Cube(props) {
 
   return (
     <div>
+      <div>
+        <Slider speed={speed} onSpeedChange={newSpeed => setSpeed(newSpeed)} />
+      </div>
       <CubeGrid cube={cube} size={size} />
     </div>
   );
