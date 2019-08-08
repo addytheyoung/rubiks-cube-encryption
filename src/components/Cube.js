@@ -71,18 +71,35 @@ const newCube = (partialMessage, size) => {
   return cube;
 };
 
-// const Slider = ({ speed, onSpeedChange }) => {};
-
 export default function Cube(props) {
   const message = props.message.split("");
+  const key = props.key;
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
-  const [Cube, setCube] = useState(newCube(message, size));
+  const [cube, setCube] = useState(newCube(message, size));
+  const [speed, setSpeed] = useState(500);
+  const [isGameRunning, setIsGameRunning] = useState(false);
 
-  const twistCube = () => {};
+  function twistCube() {}
+
+  function runStopButton() {
+    return isGameRunning ? (
+      <button type="button" onClick={handleStop}>
+        Stop
+      </button>
+    ) : (
+      <button type="button" onClick={handleRun}>
+        Start
+      </button>
+    );
+  }
+
+  function handleRun() {}
+
+  function handleStop() {}
 
   return (
     <div>
-      <CubeGrid cube={Cube} size={size} />
+      <CubeGrid cube={cube} size={size} />
     </div>
   );
 }
