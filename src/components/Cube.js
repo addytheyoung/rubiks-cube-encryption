@@ -28,14 +28,14 @@ const newCube = (partialMessage, size) => {
   for (let i = 0; i < size; i++) {
     cube[i] = [];
     for (let j = 0; j < size; j++) {
-      cube[i][j] = new Sticker("", "black");
+      cube[i][j] = new Sticker("", "#282828");
     }
     for (let j = size; j < 2 * size; j++) {
       cube[i][j] = new Sticker(message[cubeIndex], "white");
       cubeIndex++;
     }
     for (let j = 2 * size; j < 4 * size; j++) {
-      cube[i][j] = new Sticker("", "black");
+      cube[i][j] = new Sticker("", "#282828");
     }
   }
   for (let i = size; i < 2 * size; i++) {
@@ -60,14 +60,14 @@ const newCube = (partialMessage, size) => {
   for (let i = 2 * size; i < 3 * size; i++) {
     cube[i] = [];
     for (let j = 0; j < size; j++) {
-      cube[i][j] = new Sticker("", "black");
+      cube[i][j] = new Sticker("", "#282828");
     }
     for (let j = size; j < 2 * size; j++) {
       cube[i][j] = new Sticker(message[cubeIndex], "yellow");
       cubeIndex++;
     }
     for (let j = 2 * size; j < 4 * size; j++) {
-      cube[i][j] = new Sticker("", "black");
+      cube[i][j] = new Sticker("", "#282828");
     }
   }
   return cube;
@@ -81,7 +81,13 @@ export default function Cube(props) {
   const [speed, setSpeed] = useState(500);
   const [isGameRunning, setIsGameRunning] = useState(false);
 
-  function twistCube() {}
+  function twistCube(k) {
+    const totalTypes = 12 * Math.floor(size / 2)
+    k %= totalTypes;
+    // type range from 0 to 5
+    const type = k / (Math.floor(size / 2) * 2);
+    
+  }
 
   function runStopButton() {
     return isGameRunning ? (
@@ -105,7 +111,7 @@ export default function Cube(props) {
 
   return (
     <div>
-      <div>
+      <div style={{ display: "flex", justifyContent: "center", margin: 25 }}>
         {runStopButton()}
         <Slider speed={speed} onSpeedChange={newSpeed => setSpeed(newSpeed)} />
       </div>
