@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect } from "react";
 import CubeGrid from "./CubeGrid";
 import Slider from "./Slider";
+import RunStopButton from "./RunStopButton";
 
 const newCube = (partialMessage, size) => {
   const generateFullMessage = () => {
@@ -81,39 +81,29 @@ export default function Cube(props) {
   const [speed, setSpeed] = useState(500);
   const [isGameRunning, setIsGameRunning] = useState(false);
 
+  useEffect(() => {
+    console.log(isGameRunning, speed);
+    //   // effect
+    //   // return () => {
+    //   //   cleanup
+    //   // };
+  });
+
   function twistCube(k) {
-    const totalTypes = 12 * Math.floor(size / 2)
+    const totalTypes = 12 * Math.floor(size / 2);
     k %= totalTypes;
     // type range from 0 to 5
     const type = k / (Math.floor(size / 2) * 2);
-    
-  }
-
-  function runStopButton() {
-    return isGameRunning ? (
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => setIsGameRunning(false)}
-      >
-        Stop
-      </Button>
-    ) : (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setIsGameRunning(true)}
-      >
-        Start
-      </Button>
-    );
   }
 
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center", margin: 25 }}>
-        {runStopButton()}
-        <Slider speed={speed} onSpeedChange={newSpeed => setSpeed(newSpeed)} />
+        <RunStopButton
+          isGameRunning={isGameRunning}
+          setIsGameRunning={setIsGameRunning}
+        />
+        <Slider speed={speed} setSpeed={setSpeed} />
       </div>
       <CubeGrid cube={cube} size={size} />
     </div>
