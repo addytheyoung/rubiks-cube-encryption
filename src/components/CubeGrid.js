@@ -14,7 +14,7 @@ export default function CubeGrid({ cube, size }) {
     tr.push(<tr key={i}>{td}</tr>);
   }
   return (
-    <table>
+    <table style={{ margin: 25 }}>
       <tbody>{tr}</tbody>
     </table>
   );

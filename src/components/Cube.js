@@ -2,99 +2,45 @@ import React, { useState, useEffect } from "react";
 import CubeGrid from "./CubeGrid";
 import Slider from "./Slider";
 import RunStopButton from "./RunStopButton";
+import newCube from "../math/NewCube";
+import twistCube from "../math/TwistCube";
+import { arrayKey, hashKey } from "../math/Key";
 
-const newCube = (partialMessage, size) => {
-  const generateFullMessage = () => {
-    const cubeSize = size * size * 6;
-    if (cubeSize === partialMessage.length) {
-      return partialMessage;
-    }
-    // null character
-    partialMessage.push(0);
-    // add random characters for remaining length
-    for (let i = partialMessage.length; i < cubeSize; i++) {
-      partialMessage[i] = String.fromCharCode(Math.random() * 58 + 65);
-    }
-    return partialMessage;
-  };
-  const message = generateFullMessage();
-  // constructor for grid elements
-  function Sticker(character, color) {
-    this.character = character;
-    this.color = color;
-  }
-  const cube = [];
-  let cubeIndex = 0;
-  for (let i = 0; i < size; i++) {
-    cube[i] = [];
-    for (let j = 0; j < size; j++) {
-      cube[i][j] = new Sticker("", "#282828");
-    }
-    for (let j = size; j < 2 * size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "white");
-      cubeIndex++;
-    }
-    for (let j = 2 * size; j < 4 * size; j++) {
-      cube[i][j] = new Sticker("", "#282828");
-    }
-  }
-  for (let i = size; i < 2 * size; i++) {
-    cube[i] = [];
-    for (let j = 0; j < size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "orange");
-      cubeIndex++;
-    }
-    for (let j = size; j < 2 * size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "green");
-      cubeIndex++;
-    }
-    for (let j = 2 * size; j < 3 * size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "red");
-      cubeIndex++;
-    }
-    for (let j = 3 * size; j < 4 * size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "blue");
-      cubeIndex++;
-    }
-  }
-  for (let i = 2 * size; i < 3 * size; i++) {
-    cube[i] = [];
-    for (let j = 0; j < size; j++) {
-      cube[i][j] = new Sticker("", "#282828");
-    }
-    for (let j = size; j < 2 * size; j++) {
-      cube[i][j] = new Sticker(message[cubeIndex], "yellow");
-      cubeIndex++;
-    }
-    for (let j = 2 * size; j < 4 * size; j++) {
-      cube[i][j] = new Sticker("", "#282828");
-    }
-  }
-  return cube;
-};
+export default function Cube({ stringKey, message }) {
+  // const key = Array.from({ length: 1000 }, () =>
+  //   Math.floor(Math.random() * 40)
+  // );
+  // const key = props.key;
+  console.log(stringKey);
 
-export default function Cube(props) {
-  const message = props.message.split("");
-  const key = props.key;
+  const key = hashKey("cubeKey");
+
+  // const key = arrayKey(cubeKey);
+
+  console.log(key);
+
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
+  const [keyIndex, setKeyIndex] = useState(0);
   const [cube, setCube] = useState(newCube(message, size));
-  const [speed, setSpeed] = useState(500);
   const [isGameRunning, setIsGameRunning] = useState(false);
+  const [speed, setSpeed] = useState(500);
 
+  // start stop effect
   useEffect(() => {
-    console.log(isGameRunning, speed);
-    //   // effect
-    //   // return () => {
-    //   //   cleanup
-    //   // };
+    const handleStart = () => {
+      console.log("started");
+      // while (keyIndex < key.length) {
+      setTimeout(() => {
+        twistCube(100, size);
+      }, speed);
+      // }
+    };
+    const handleStop = () => {
+      console.log("stopped");
+    };
+    console.log("change");
+    isGameRunning ? handleStart() : handleStop();
   });
-
-  function twistCube(k) {
-    const totalTypes = 12 * Math.floor(size / 2);
-    k %= totalTypes;
-    // type range from 0 to 5
-    const type = k / (Math.floor(size / 2) * 2);
-  }
 
   return (
     <div>
