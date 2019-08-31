@@ -4,21 +4,15 @@ import Slider from "./Slider";
 import RunStopButton from "./RunStopButton";
 import newCube from "../math/NewCube";
 import twistCube from "../math/TwistCube";
-import { arrayKey, hashKey } from "../math/Key";
+import { arrayKey, hash } from "../math/Key";
 
 export default function Cube({ stringKey, message }) {
-  // const key = Array.from({ length: 1000 }, () =>
-  //   Math.floor(Math.random() * 40)
-  // );
-  // const key = props.key;
   console.log(stringKey);
 
-  const key = hashKey("cubeKey");
-
-  // const key = arrayKey(cubeKey);
+  const key = hash("sdgferavb  ");
 
   console.log(key);
-
+  console.log(arrayKey(key));
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
   const [keyIndex, setKeyIndex] = useState(0);
   const [cube, setCube] = useState(newCube(message, size));
