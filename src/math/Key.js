@@ -26,6 +26,10 @@
 //   return arrayKey;
 // };
 
+export const generateArrayKey = () => {
+  
+}
+
 export const arrayKey = key => {
   if (key < Math.pow(10, 300)) {
     key *= 10;

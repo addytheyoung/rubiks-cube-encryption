@@ -6,7 +6,12 @@ export default function CubeGrid({ cube, size }) {
     const td = [];
     for (let j = 0; j < 4 * size; j++) {
       td.push(
-        <td key={`${i},${j}`} align="char" bgcolor={cube[i][j].color}>
+        <td
+          key={`${i},${j}`}
+          bgcolor={cube[i][j].color}
+          // align="char"
+          // width="200"
+        >
           {cube[i][j].character}
         </td>
       );

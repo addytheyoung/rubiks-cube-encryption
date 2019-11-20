@@ -6,13 +6,13 @@ import newCube from "../math/NewCube";
 import twistCube from "../math/TwistCube";
 import { arrayKey, hash } from "../math/Key";
 
-export default function Cube({ stringKey, message }) {
-  console.log(stringKey);
+export default function Cube({ key, message }) {
+  // console.log(stringKey);
 
-  const key = hash("sdgferavb  ");
+  // const key = hash("sdgferavb  ");
 
-  console.log(key);
-  console.log(arrayKey(key));
+  // console.log(key);
+  // console.log(arrayKey(key));
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
   const [keyIndex, setKeyIndex] = useState(0);
   const [cube, setCube] = useState(newCube(message, size));
